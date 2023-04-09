@@ -1,0 +1,33 @@
+/*** Definition Section has one variable
+which can be accessed inside yylex()
+and main() ***/
+
+%{
+#include <stdio.h>
+%}
+
+identifier [ ]?[A-Za-z_]([A-Za-z_]|[0-9])*[ ]?
+word [ ]?debut|fin|si|alors|sinon|finsi[ ]?
+string [ ]?\".+\"[ ]?
+number [ ]?0|[1-9][0-9]*[ ]?
+operator [ ]?[-+*/<>]|\-\-|\+\+|\=\=|\!\=|\=\=\=|mod[ ]?
+assignment [ ]?:=[ ]?
+
+%%
+
+{identifier} {printf("identifier: %s\n",yytext);}
+{word} {printf("single word: %s\n",yytext);}
+{string} {printf("list of words: %s\n",yytext);}
+{number} {printf("number: %s\n",yytext);}
+{operator} {printf("operator: %s\n",yytext);}
+{assignment} {printf("assignment: %s\n",yytext);}
+.+ printf("ERROR\n");
+
+%%
+
+int yywrap(){ return 1;}
+int main() 
+{
+yylex();
+return 0;
+}
