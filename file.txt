@@ -1,0 +1,11 @@
+"hello world!"
+word
+if 
+else
+while
+7
++
+-
+/
+*
+:=
